@@ -1,0 +1,572 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>函数记录 | KongFuKang-功夫康</title><meta name="keywords" content="机器学习,Pytorch"><meta name="author" content="功夫康"><meta name="copyright" content="功夫康"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="tensor.detach() detach() Returns a new Tensor, detached from the current graph.The result will never require gradient.This method also affects forward mode AD gradients and the result will never have">
+<meta property="og:type" content="article">
+<meta property="og:title" content="函数记录">
+<meta property="og:url" content="https://kongfukang.com/2022/09/29/func1/index.html">
+<meta property="og:site_name" content="KongFuKang-功夫康">
+<meta property="og:description" content="tensor.detach() detach() Returns a new Tensor, detached from the current graph.The result will never require gradient.This method also affects forward mode AD gradients and the result will never have">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic3.zhimg.com/v2-438418e1797c9229b722283e18ee64fa_r.jpg">
+<meta property="article:published_time" content="2022-09-29T13:58:01.000Z">
+<meta property="article:modified_time" content="2022-09-29T14:51:08.338Z">
+<meta property="article:author" content="功夫康">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="Pytorch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic3.zhimg.com/v2-438418e1797c9229b722283e18ee64fa_r.jpg"><link rel="shortcut icon" href="https://s2.loli.net/2022/09/18/6LZrOqxusTiJlD8.jpg"><link rel="canonical" href="https://kongfukang.com/2022/09/29/func1/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c08b62261c12192351b64bdacb3d2db3";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 功夫康","link":"链接: ","source":"来源: KongFuKang-功夫康","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '函数记录',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2022-09-29 22:51:08'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2022/09/18/z9NKi5qMbCgVToB.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa-solid fa-eye"></i><span> 概览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-archive"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fa-solid fa-gamepad"></i><span> Games</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fa-solid fa-book-open-reader"></i><span> Books</span></a></li><li><a class="site-page child" href="/image/"><i class="fa-fw fa-solid fa-images"></i><span> 影集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://pic3.zhimg.com/v2-438418e1797c9229b722283e18ee64fa_r.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">KongFuKang-功夫康</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa-solid fa-eye"></i><span> 概览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-archive"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fa-solid fa-gamepad"></i><span> Games</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fa-solid fa-book-open-reader"></i><span> Books</span></a></li><li><a class="site-page child" href="/image/"><i class="fa-fw fa-solid fa-images"></i><span> 影集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">函数记录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-29T13:58:01.000Z" title="发表于 2022-09-29 21:58:01">2022-09-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-09-29T14:51:08.338Z" title="更新于 2022-09-29 22:51:08">2022-09-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Learn/">Learn</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="函数记录"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2022/09/29/func1/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/2022/09/29/func1/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="tensor-detach">tensor.detach()</h2>
+<p><a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/generated/torch.Tensor.detach.html">detach()</a></p>
+<p>Returns a new Tensor, detached from the current graph.The result will never require gradient.This method also affects forward mode AD gradients and the result will never have forward mode AD gradients.<br>
+NOTE:<br>
+Returned Tensor shares the same storage with the original one. In-place modifications on either of them will be seen, and may trigger errors in correctness checks. IMPORTANT NOTE: Previously, in-place size / stride / storage changes (such as resize_ / resize_as_ / set_ / transpose_) to the returned tensor also update the original tensor. Now, these in-place changes will not update the original tensor anymore, and will instead trigger an error. For sparse tensors: In-place indices / values changes (such as zero_ / copy_ / add_) to the returned tensor will not update the original tensor anymore, and will instead trigger an error.</p>
+<p>即：返回一个新的tensor，从当前计算图中分离下来。但是仍指向原变量的存放位置，不同之处只是requirse_grad为false.得到的这个tensir永远不需要计算梯度，不具有grad.<br>
+即使之后重新将它的requires_grad置为true,它也不会具有梯度grad.这样我们就会继续使用这个新的tensor进行计算，后面当我们进行反向传播时，到该调用detach()的tensor就会停止，不能再继续向前进行传播.<br>
+使用detach返回的tensor和原始的tensor共同一个内存，即一个修改另一个也会跟着改变。</p>
+<h2 id="squeeze-unsqueeze">squeeze() &amp; unsqueeze()</h2>
+<p><a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/generated/torch.squeeze.html">squeeze()</a><br>
+<a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/generated/torch.unsqueeze.html">unsqueeze()</a></p>
+<p>squeeze(input, dim=None, *, out=None) -&gt; Tensor<br>
+Returns a tensor with all the dimensions of input of size 1 removed.<br>
+For example, if input is of shape: (A×1×B×C×1×D) then the out tensor will be of shape: (A×B×C×D).<br>
+When dim is given, a squeeze operation is done only in the given dimension. If input is of shape: (A×1×B), squeeze(input, 0) leaves the tensor unchanged, but squeeze(input, 1) will squeeze the tensor to the shape (A×B).<br>
+NOTE:<br>
+The returned tensor shares the storage with the input tensor, so changing the contents of one will change the contents of the other.<br>
+If the tensor has a batch dimension of size 1, then squeeze(input) will also remove the batch dimension, which can lead to unexpected errors.<br>
+“”&quot;</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>x = torch.zeros(2, 1, 2, 1, 2)<br>
+x.size()<br>
+torch.Size([2, 1, 2, 1, 2])<br>
+y = torch.squeeze(x)<br>
+y.size()<br>
+torch.Size([2, 2, 2])<br>
+y = torch.squeeze(x, 0)<br>
+y.size()<br>
+torch.Size([2, 1, 2, 1, 2])<br>
+y = torch.squeeze(x, 1)<br>
+y.size()<br>
+torch.Size([2, 2, 1, 2])<br>
+“”&quot;</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>unsqueeze(input, dim) → Tensor<br>
+Returns a new tensor with a dimension of size one inserted at the specified position.</p>
+<p>The returned tensor shares the same underlying data with this tensor.<br>
+A dim value within the range [-input.dim() - 1, input.dim() + 1] can be used. Negative dim will correspond to unsqueeze() applied at dim = dim + input.dim() + 1<br>
+“”&quot;</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>x = torch.tensor([1, 2, 3, 4])<br>
+torch.unsqueeze(x, 0)<br>
+tensor([[ 1,  2,  3,  4]])<br>
+torch.unsqueeze(x, 1)<br>
+tensor([[ 1],<br>
+[ 2],<br>
+[ 3],<br>
+[ 4]])<br>
+“”&quot;</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>简而言之，squeeze是压缩tensor（减少维度），unsqueeze是展开tensor（增加维度）</p>
+<h2 id="einsum">einsum()</h2>
+<p><a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/generated/torch.einsum.html"><strong>torch.einsum</strong></a></p>
+<p>Sums the product of the elements of the input operands along dimensions specified using a notation based on the Einstein summation convention.</p>
+<p>Einsum allows computing many common multi-dimensional linear algebraic array operations by representing them in a short-hand format based on the Einstein summation convention, given by equation. The details of this format are described below, but the general idea is to label every dimension of the input operands with some subscript and define which subscripts are part of the output. The output is then computed by summing the product of the elements of the operands along the dimensions whose subscripts are not part of the output. For example, matrix multiplication can be computed using einsum as torch.einsum(“ij,jk-&gt;ik”, A, B). Here, j is the summation subscript and i and k the output subscripts (see section below for more details on why).</p>
+<p><strong>Equation</strong>:<br>
+The equation string specifies the subscripts (letters in [a-zA-Z]) for each dimension of the input operands in the same order as the dimensions, separating subcripts for each operand by a comma (‘,’), e.g. ‘ij,jk’ specify subscripts for two 2D operands. The dimensions labeled with the same subscript must be broadcastable, that is, their size must either match or be 1. The exception is if a subscript is repeated for the same input operand, in which case the dimensions labeled with this subscript for this operand must match in size and the operand will be replaced by its diagonal along these dimensions. The subscripts that appear exactly once in the equation will be part of the output, sorted in increasing alphabetical order. The output is computed by multiplying the input operands element-wise, with their dimensions aligned based on the subscripts, and then summing out the dimensions whose subscripts are not part of the output.</p>
+<p>Optionally, the output subscripts can be explicitly defined by adding an arrow (‘-&gt;’) at the end of the equation followed by the subscripts for the output. For instance, the following equation computes the transpose of a matrix multiplication: ‘ij,jk-&gt;ki’. The output subscripts must appear at least once for some input operand and at most once for the output.</p>
+<p>Ellipsis (‘…’) can be used in place of subscripts to broadcast the dimensions covered by the ellipsis. Each input operand may contain at most one ellipsis which will cover the dimensions not covered by subscripts, e.g. for an input operand with 5 dimensions, the ellipsis in the equation ‘ab…c’ cover the third and fourth dimensions. The ellipsis does not need to cover the same number of dimensions across the operands but the ‘shape’ of the ellipsis (the size of the dimensions covered by them) must broadcast together. If the output is not explicitly defined with the arrow (‘-&gt;’) notation, the ellipsis will come first in the output (left-most dimensions), before the subscript labels that appear exactly once for the input operands. e.g. the following equation implements batch matrix multiplication ‘…ij,…jk’.</p>
+<p>A few final notes: the equation may contain whitespaces between the different elements (subscripts, ellipsis, arrow and comma) but something like ‘…’ is not valid. An empty string ‘’ is valid for scalar operands.</p>
+<p><strong>NOTE</strong>:<br>
+torch.einsum handles ellipsis (‘…’) differently from NumPy in that it allows dimensions covered by the ellipsis to be summed over, that is, ellipsis are not required to be part of the output.<br>
+This function does not optimize the given expression, so a different formula for the same computation may run faster or consume less memory. Projects like opt_einsum (<a target="_blank" rel="noopener" href="https://optimized-einsum.readthedocs.io/en/stable/">https://optimized-einsum.readthedocs.io/en/stable/</a>) can optimize the formula for you.<br>
+As of PyTorch 1.10 torch.einsum() also supports the sublist format (see examples below). In this format, subscripts for each operand are specified by sublists, list of integers in the range [0, 52). These sublists follow their operands, and an extra sublist can appear at the end of the input to specify the output’s subscripts., e.g. torch.einsum(op1, sublist1, op2, sublist2, …, [subslist_out]). Python’s Ellipsis object may be provided in a sublist to enable broadcasting as described in the Equation section above.</p>
+<p><strong>example</strong>:<br>
+“”&quot;</p>
+<h1>trace</h1>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>torch.einsum(‘ii’, torch.randn(4, 4))<br>
+tensor(-1.2104)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h1>diagonal</h1>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>torch.einsum(‘ii-&gt;i’, torch.randn(4, 4))<br>
+tensor([-0.1034,  0.7952, -0.2433,  0.4545])</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h1>outer product</h1>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>x = torch.randn(5)<br>
+y = torch.randn(4)<br>
+torch.einsum(‘i,j-&gt;ij’, x, y)<br>
+tensor([[ 0.1156, -0.2897, -0.3918,  0.4963],<br>
+[-0.3744,  0.9381,  1.2685, -1.6070],<br>
+[ 0.7208, -1.8058, -2.4419,  3.0936],<br>
+[ 0.1713, -0.4291, -0.5802,  0.7350],<br>
+[ 0.5704, -1.4290, -1.9323,  2.4480]])</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h1>batch matrix multiplication</h1>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>As = torch.randn(3,2,5)<br>
+Bs = torch.randn(3,5,4)<br>
+torch.einsum(‘bij,bjk-&gt;bik’, As, Bs)<br>
+tensor([[[-1.0564, -1.5904,  3.2023,  3.1271],<br>
+[-1.6706, -0.8097, -0.8025, -2.1183]],</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<pre><code>    [[ 4.2239,  0.3107, -0.5756, -0.2354],
+    [-1.4558, -0.3460,  1.5087, -0.8530]],
+
+    [[ 2.8153,  1.8787, -4.3839, -1.2112],
+    [ 0.3728, -2.1131,  0.0921,  0.8305]]])
+</code></pre>
+<h1>with sublist format and ellipsis</h1>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>torch.einsum(As, […, 0, 1], Bs, […, 1, 2], […, 0, 2])<br>
+tensor([[[-1.0564, -1.5904,  3.2023,  3.1271],<br>
+[-1.6706, -0.8097, -0.8025, -2.1183]],</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<pre><code>    [[ 4.2239,  0.3107, -0.5756, -0.2354],
+    [-1.4558, -0.3460,  1.5087, -0.8530]],
+
+    [[ 2.8153,  1.8787, -4.3839, -1.2112],
+    [ 0.3728, -2.1131,  0.0921,  0.8305]]])
+</code></pre>
+<h1>batch permute</h1>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>A = torch.randn(2, 3, 4, 5)<br>
+torch.einsum(‘…ij-&gt;…ji’, A).shape<br>
+torch.Size([2, 3, 5, 4])</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h1>equivalent to torch.nn.functional.bilinear</h1>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>A = torch.randn(3,5,4)<br>
+l = torch.randn(2,5)<br>
+r = torch.randn(2,4)<br>
+torch.einsum(‘bn,anm,bm-&gt;ba’, l, A, r)<br>
+tensor([[-0.3430, -5.2405,  0.4494],<br>
+[ 0.3311,  5.5201, -3.0356]])<br>
+“”&quot;</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>使用爱因斯坦求和约定，可以以简单的方式表示许多常见的多维线性代数数组运算。比如在矩阵运算上，einsum比直接进行元素间运算再按行求和快数倍。</p>
+<p><a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/reference/generated/numpy.einsum.html"><strong>numpy.einsum</strong></a></p>
+<h2 id="assert-of-Python">assert of Python</h2>
+<p><img src="https://www.runoob.com/wp-content/uploads/2019/07/assert.png" alt=""><br>
+语法格式：<br>
+“”&quot;<br>
+assert expression</p>
+<p>assert expression [, arguments]<br>
+“”&quot;<br>
+等价于：<br>
+“”&quot;<br>
+if not expression:<br>
+raise AssertionError</p>
+<p>if not expression:<br>
+raise AssertionError(arguments)<br>
+“”&quot;</p>
+<p><strong>example</strong>:<br>
+“”&quot;</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>assert True     # 条件为 true 正常执行<br>
+assert False    # 条件为 false 触发异常<br>
+Traceback (most recent call last):<br>
+File “<stdin>”, line 1, in <module><br>
+AssertionError<br>
+assert 1==1    # 条件为 true 正常执行<br>
+assert 1==2    # 条件为 false 触发异常<br>
+Traceback (most recent call last):<br>
+File “<stdin>”, line 1, in <module><br>
+AssertionError</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>assert 1==2, ‘1 不等于 2’<br>
+Traceback (most recent call last):<br>
+File “<stdin>”, line 1, in <module><br>
+AssertionError: 1 不等于 2</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>“”&quot;<br>
+即当表达式为True时跳过，False时执行语句或触发异常</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://kongfukang.com">功夫康</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://kongfukang.com/2022/09/29/func1/">https://kongfukang.com/2022/09/29/func1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://kongfukang.com" target="_blank">KongFuKang-功夫康</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><a class="post-meta__tags" href="/tags/Pytorch/">Pytorch</a></div><div class="post_share"><div class="social-share" data-image="https://pic3.zhimg.com/v2-438418e1797c9229b722283e18ee64fa_r.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/09/24/ODI/"><img class="next-cover" src="https://s2.loli.net/2022/09/24/QkLcO9xPFKIAoz8.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Improving the Transferability of Targeted Adversarial Examples through Object-Based Diverse Input</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/09/20/Conv-Natural-Network/" title="Digit Recognizer By CNN (Conv Natural Network)"><img class="cover" src="https://pic3.zhimg.com/v2-8e7a76f466037e77f3c232799a56b630_1440w.jpg?source=172ae18b" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-20</div><div class="title">Digit Recognizer By CNN (Conv Natural Network)</div></div></a></div><div><a href="/2022/09/18/MCMC/" title="MCMC"><img class="cover" src="https://th.bing.com/th/id/R.93252e6d15f6d90dcc25369299b843be?rik=Df2QCnmVKTGiNw&pid=ImgRaw&r=0" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-18</div><div class="title">MCMC</div></div></a></div><div><a href="/2022/09/20/Plan20220920/" title="用三周时间确定一个方向"><img class="cover" src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9LbVhQS0ExOWdXaWNXTmxWRFc5RmpwY0VpYzU5aWF3c0t0SWJoeVlzTE5oWnh2dDR2N1VUbks4bEpaSEhUWXVtWGlicWpVV3ZwcVJtZmNpYWJQSFJWdDY5bVBBLzY0MA?x-oss-process=image/format,png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-20</div><div class="title">用三周时间确定一个方向</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2022/09/18/z9NKi5qMbCgVToB.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">功夫康</div><div class="author-info__description">For Whatever You Want</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SLONGkang"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/SLONGkang" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:ksl28438@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://blog.csdn.net/weixin_43643900?spm=1019.2139.3001.5343" target="_blank" title="CSDN"><i class="fa-solid fa-comments"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">每天更新是我类原则！有问题可以通过上方163邮箱找我</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tensor-detach"><span class="toc-number">1.</span> <span class="toc-text">tensor.detach()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#squeeze-unsqueeze"><span class="toc-number">2.</span> <span class="toc-text">squeeze() &amp; unsqueeze()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#einsum"><span class="toc-number">3.</span> <span class="toc-text">einsum()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number"></span> <span class="toc-text">trace</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number"></span> <span class="toc-text">diagonal</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number"></span> <span class="toc-text">outer product</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number"></span> <span class="toc-text">batch matrix multiplication</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number"></span> <span class="toc-text">with sublist format and ellipsis</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number"></span> <span class="toc-text">batch permute</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number"></span> <span class="toc-text">equivalent to torch.nn.functional.bilinear</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#assert-of-Python"><span class="toc-number">1.</span> <span class="toc-text">assert of Python</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/09/29/func1/" title="函数记录"><img src="https://pic3.zhimg.com/v2-438418e1797c9229b722283e18ee64fa_r.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="函数记录"/></a><div class="content"><a class="title" href="/2022/09/29/func1/" title="函数记录">函数记录</a><time datetime="2022-09-29T13:58:01.000Z" title="发表于 2022-09-29 21:58:01">2022-09-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/24/ODI/" title="Improving the Transferability of Targeted Adversarial Examples through Object-Based Diverse Input"><img src="https://s2.loli.net/2022/09/24/QkLcO9xPFKIAoz8.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Improving the Transferability of Targeted Adversarial Examples through Object-Based Diverse Input"/></a><div class="content"><a class="title" href="/2022/09/24/ODI/" title="Improving the Transferability of Targeted Adversarial Examples through Object-Based Diverse Input">Improving the Transferability of Targeted Adversarial Examples through Object-Based Diverse Input</a><time datetime="2022-09-24T15:04:57.000Z" title="发表于 2022-09-24 23:04:57">2022-09-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/24/videoFA/" title="Over-the-Air Adversarial Flickering Attacks against Video Recognition Networks"><img src="https://s2.loli.net/2022/09/24/4l3BmUM6LQbxKOt.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Over-the-Air Adversarial Flickering Attacks against Video Recognition Networks"/></a><div class="content"><a class="title" href="/2022/09/24/videoFA/" title="Over-the-Air Adversarial Flickering Attacks against Video Recognition Networks">Over-the-Air Adversarial Flickering Attacks against Video Recognition Networks</a><time datetime="2022-09-24T15:04:57.000Z" title="发表于 2022-09-24 23:04:57">2022-09-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/22/NAA/" title="Improving Adversarial Transferability via Neuron Attribution-Based Attacks"><img src="https://pic4.zhimg.com/v2-3a9559cf89a1875fe3b7bb73496a633f_r.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Improving Adversarial Transferability via Neuron Attribution-Based Attacks"/></a><div class="content"><a class="title" href="/2022/09/22/NAA/" title="Improving Adversarial Transferability via Neuron Attribution-Based Attacks">Improving Adversarial Transferability via Neuron Attribution-Based Attacks</a><time datetime="2022-09-22T09:42:27.000Z" title="发表于 2022-09-22 17:42:27">2022-09-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/20/Plan20220920/" title="用三周时间确定一个方向"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9LbVhQS0ExOWdXaWNXTmxWRFc5RmpwY0VpYzU5aWF3c0t0SWJoeVlzTE5oWnh2dDR2N1VUbks4bEpaSEhUWXVtWGlicWpVV3ZwcVJtZmNpYWJQSFJWdDY5bVBBLzY0MA?x-oss-process=image/format,png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="用三周时间确定一个方向"/></a><div class="content"><a class="title" href="/2022/09/20/Plan20220920/" title="用三周时间确定一个方向">用三周时间确定一个方向</a><time datetime="2022-09-20T15:50:46.000Z" title="发表于 2022-09-20 23:50:46">2022-09-20</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://s2.loli.net/2022/09/19/YDqc8yvx7TNbfjz.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2022 By 功夫康</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://kongfukang.com/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'YcqvMnq6vGm5ShTamwS9BZlC-gzGzoHsz',
+      appKey: 'jsLlJIV3tzZNUsy3YtH9YiWS',
+      avatar: 'robohash',
+      serverURLs: 'https://ycqvmnq6.lc-cn-n1-shared.com',
+      emojiMaps: {"tv_doge":"6ea59c827c414b4a2955fe79e0f6fd3dcd515e24.png","tv_亲亲":"a8111ad55953ef5e3be3327ef94eb4a39d535d06.png","tv_偷笑":"bb690d4107620f1c15cff29509db529a73aee261.png","tv_再见":"180129b8ea851044ce71caf55cc8ce44bd4a4fc8.png","tv_冷漠":"b9cbc755c2b3ee43be07ca13de84e5b699a3f101.png","tv_发怒":"34ba3cd204d5b05fec70ce08fa9fa0dd612409ff.png","tv_发财":"34db290afd2963723c6eb3c4560667db7253a21a.png","tv_可爱":"9e55fd9b500ac4b96613539f1ce2f9499e314ed9.png","tv_吐血":"09dd16a7aa59b77baa1155d47484409624470c77.png","tv_呆":"fe1179ebaa191569b0d31cecafe7a2cd1c951c9d.png","tv_呕吐":"9f996894a39e282ccf5e66856af49483f81870f3.png","tv_困":"241ee304e44c0af029adceb294399391e4737ef2.png","tv_坏笑":"1f0b87f731a671079842116e0991c91c2c88645a.png","tv_大佬":"093c1e2c490161aca397afc45573c877cdead616.png","tv_大哭":"23269aeb35f99daee28dda129676f6e9ea87934f.png","tv_委屈":"d04dba7b5465779e9755d2ab6f0a897b9b33bb77.png","tv_害羞":"a37683fb5642fa3ddfc7f4e5525fd13e42a2bdb1.png","tv_尴尬":"7cfa62dafc59798a3d3fb262d421eeeff166cfa4.png","tv_微笑":"70dc5c7b56f93eb61bddba11e28fb1d18fddcd4c.png","tv_思考":"90cf159733e558137ed20aa04d09964436f618a1.png","tv_惊吓":"0d15c7e2ee58e935adc6a7193ee042388adc22af.png"},
+      path: window.location.pathname,
+      visitor: false
+    }, {"recordIP":true,"placeholder":"来了，说点什么~","emojiCDN":"//i0.hdslb.com/bfs/emote/"}))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="https://cdn.jsdelivr.net/npm/blueimp-md5/js/md5.min.js"></script><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getIcon = (icon, mail) => {
+    if (icon) return icon
+    let defaultIcon = '?d=robohash'
+    let iconUrl = `https://gravatar.loli.net/avatar/${md5(mail.toLowerCase()) + defaultIcon}`
+    return iconUrl
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = () => {
+    const serverURL = 'https://ycqvmnq6.lc-cn-n1-shared.com'
+
+    var settings = {
+      "method": "GET",
+      "headers": {
+        "X-LC-Id": 'YcqvMnq6vGm5ShTamwS9BZlC-gzGzoHsz',
+        "X-LC-Key": 'jsLlJIV3tzZNUsy3YtH9YiWS',
+        "Content-Type": "application/json"
+      },
+    }
+
+    fetch(`${serverURL}/1.1/classes/Comment?limit=6&order=-createdAt`,settings)
+      .then(response => response.json())
+      .then(data => {
+        const valineArray = data.results.map(function (e) {
+          return {
+            'avatar': getIcon(e.QQAvatar, e.mail),
+            'content': changeContent(e.comment),
+            'nick': e.nick,
+            'url': e.url + '#' + e.objectId,
+            'date': e.updatedAt,
+          }
+        })
+        saveToLocal.set('valine-newest-comments', JSON.stringify(valineArray), 10/(60*24))
+        generateHtml(valineArray)
+      }).catch(e => {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      }) 
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('valine-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><div class="aplayer no-destroy" data-id="7649103287" data-server="netease" data-type="playlist" data-order="random" data-fixed="true" data-listmaxheight=500px data-mini="true" data-autoplay="false"> </div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="富强,文明,和谐" data-fontsize="15px" data-random="false" async="async"></script><script src="//code.tidio.co/rujb61mwiywttpnx1g7p5qjhd2a2ji6c.js" async="async"></script><script>function onTidioChatApiReady() {
+  window.tidioChatApi.hide();
+  window.tidioChatApi.on("close", function() {
+    window.tidioChatApi.hide();
+  });
+}
+if (window.tidioChatApi) {
+  window.tidioChatApi.on("ready", onTidioChatApiReady);
+} else {
+  document.addEventListener("tidioChat-ready", onTidioChatApiReady);
+}
+
+var chatBtnFn = () => {
+  document.getElementById("chat_btn").addEventListener("click", function(){
+    window.tidioChatApi.show();
+    window.tidioChatApi.open();
+  });
+}
+chatBtnFn()
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
